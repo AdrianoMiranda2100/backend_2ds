@@ -5,9 +5,9 @@ const porta = 8005
 //Carrega o caminho dos arquivos
 const home = path.join(__dirname, 'pages/index.html')
 const sobre = path.join(__dirname, 'pages/sobre.html')
-const erro = path.join()
+const error = path.join(__dirname, 'pages/error.html')
 
-const server = http.createServer((req,res) =>{
+const server = http.createServer((req, res) =>{
     const urlTratada = new URL(req.url, `http://${req.headers.host}`)
     const recurso = urlTratada.pathname 
 
@@ -22,9 +22,9 @@ const server = http.createServer((req,res) =>{
     return res.end(fs.readfilesync(sobre, 'utf-8'))
 
     }else {
-    res.statusCode = 404
+    res.statusCode = 401
     res.setHeader('Content-Type', 'text/html; charset=utf-8')
-    res.end('<h3>Página não encontrada! \nErro 404</h3>')
+    res.end('401 Não Autorizado')
 
     }
 })
